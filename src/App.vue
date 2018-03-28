@@ -123,13 +123,14 @@ export default {
                             // only one result is returned to reduce data load, but it still is returned as an Array
                             var bookInfo = data.items[0]
                             // TODO: replace dummy data below with correct fields within given JSON data
+                            
                             booksRef.push({
-                                title: title,
-                                author: author,
-                                year: '2001',                         // TODO: find book's publication date
-                                description: 'Interesting book',      // TODO: find book's description
-                                url: 'https://google.com',            // TODO: find link to the book's information
-                                imgUrl: this.makeURLSecure('http://files.selar.co/product-images/2017/products/demo/preorder-physical-product-selar.co-59d1e525c3a96.jpg'), // TODO: find link to the book's thumbnail image
+                                title: bookInfo.volumeInfo.title,
+                                author: bookInfo.volumeInfo.authors[0],
+                                year: bookInfo.volumeInfo.publishedDate,                         // TODO: find book's publication date
+                                description: bookInfo.volumeInfo.description,      // TODO: find book's description
+                                url: bookInfo.selfLink,            // TODO: find link to the book's information
+                                imgUrl: bookInfo.volumeInfo.imageLinks.thumbnail, // TODO: find link to the book's thumbnail image
                             })
                        })
                       .catch(error => console.log(error))
